@@ -1,4 +1,6 @@
 import React from "react";
+import Greeting from "./Greeting";
+import UserGreetings from "./UserGreetings";
 
 const users = [
   { firstName: "Rebekah", lastName: "CK", id: 1, city: "Durham", state: "NC" },
@@ -19,12 +21,24 @@ const users = [
 ];
 
 function App() {
+  console.log("ALL USERS:", users);
+  // map demo
+  const newUsers = users.map((user) => {
+    console.log("This is an individual user:", user);
+    return { fullName: `${user.firstName} ${user.lastName}`, id: user.id };
+  });
+  console.log("NEW USERS:", newUsers);
+
   return (
     <>
-      {users.map((user) => (
-        <div
-          key={user.id}
-        >{`${user.firstName} ${user.lastName} is from ${user.city}, ${user.state}.`}</div>
+      <UserGreetings />
+      <hr></hr>
+      {newUsers.map((newUser) => (
+        <Greeting
+          key={newUser.id}
+          greeting="Hello"
+          userName={newUser.fullName}
+        ></Greeting>
       ))}
     </>
   );
